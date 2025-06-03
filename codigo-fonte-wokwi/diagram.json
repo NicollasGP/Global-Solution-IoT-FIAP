@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "author": "Arnaldo Viana",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -4.9, "left": 62.2, "attrs": {} },
+    {
+      "type": "wokwi-rgb-led",
+      "id": "rgb1",
+      "top": -34.4,
+      "left": 193.1,
+      "attrs": { "common": "cathode" }
+    },
+    {
+      "type": "wokwi-buzzer",
+      "id": "bz1",
+      "top": 91.5,
+      "left": -41.1,
+      "rotate": 270,
+      "attrs": { "volume": "0.1" }
+    },
+    {
+      "type": "wokwi-hc-sr04",
+      "id": "ultrasonic1",
+      "top": 139.5,
+      "left": 183.3,
+      "rotate": 90,
+      "attrs": { "distance": "39" }
+    }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "rgb1:R", "esp:D21", "red", [ "v48", "h-38.1" ] ],
+    [ "rgb1:G", "esp:D22", "green", [ "v19.2", "h-56" ] ],
+    [ "rgb1:B", "esp:D23", "blue", [ "h1.6", "v9.5" ] ],
+    [ "rgb1:COM", "esp:GND.1", "black", [ "v0" ] ],
+    [ "bz1:1", "esp:GND.2", "black", [ "h0" ] ],
+    [ "esp:D13", "bz1:2", "red", [ "h0" ] ],
+    [ "esp:3V3", "ultrasonic1:VCC", "red", [ "h28.5", "v19.2" ] ],
+    [ "ultrasonic1:GND", "esp:GND.2", "black", [ "h-172.8", "v-39.5" ] ],
+    [ "ultrasonic1:TRIG", "esp:D19", "green", [ "h-38.4", "v-115.5" ] ],
+    [ "ultrasonic1:ECHO", "esp:D18", "blue", [ "h-48", "v-116" ] ]
+  ],
+  "dependencies": {}
+}
