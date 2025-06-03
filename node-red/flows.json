@@ -1,0 +1,127 @@
+[
+    {
+        "id": "f4ff23a7bcb3f64d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "1feeec29e1144da4",
+        "type": "mqtt in",
+        "z": "f4ff23a7bcb3f64d",
+        "name": "Recebe do sensor",
+        "topic": "hidrosafe/sensor/nivel",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "96b50dd46a113e0b",
+        "inputs": 0,
+        "x": 390,
+        "y": 580,
+        "wires": [
+            [
+                "a6fa40cc41ef2a57"
+            ]
+        ]
+    },
+    {
+        "id": "a6fa40cc41ef2a57",
+        "type": "function",
+        "z": "f4ff23a7bcb3f64d",
+        "name": "Analisa nível",
+        "func": "let cm = msg.payload.distancia;\nlet estado = \"\";\n\nif (cm < 10) {\n    estado = \"Normal\";\n} else if (cm >= 10 && cm <= 20) {\n    estado = \"Atenção\";\n} else {\n    estado = \"CRÍTICO!\";\n}\n\nmsg.payload = {\n    distancia: cm + \" cm\",\n    estado: estado\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 670,
+        "y": 580,
+        "wires": [
+            [
+                "5d1709511f33f4c9",
+                "ced08e471ab51511",
+                "90ee4646d44669e0"
+            ]
+        ]
+    },
+    {
+        "id": "5d1709511f33f4c9",
+        "type": "ui_text",
+        "z": "f4ff23a7bcb3f64d",
+        "group": "grupo_hidrosafe",
+        "order": 1,
+        "width": "6",
+        "height": "1",
+        "name": "Distância em cm",
+        "label": "Distância da água:",
+        "format": "{{msg.payload.distancia}}",
+        "layout": "row-spread",
+        "x": 940,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "ced08e471ab51511",
+        "type": "ui_text",
+        "z": "f4ff23a7bcb3f64d",
+        "group": "grupo_hidrosafe",
+        "order": 2,
+        "width": "6",
+        "height": "1",
+        "name": "Estado do nível",
+        "label": "Estado:",
+        "format": "{{msg.payload.estado}}",
+        "layout": "row-spread",
+        "x": 940,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "90ee4646d44669e0",
+        "type": "debug",
+        "z": "f4ff23a7bcb3f64d",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 920,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "96b50dd46a113e0b",
+        "type": "mqtt-broker",
+        "name": "HiveMQ",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true
+    },
+    {
+        "id": "grupo_hidrosafe",
+        "type": "ui_group",
+        "name": "HidroSafe",
+        "tab": "aba_hidrosafe",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false
+    },
+    {
+        "id": "aba_hidrosafe",
+        "type": "ui_tab",
+        "name": "Monitoramento",
+        "icon": "dashboard",
+        "order": 1
+    }
+]
