@@ -49,7 +49,7 @@ A proposta atende aos critérios da disciplina **Disruptive Architectures: IoT, 
 ## 🎥 Vídeo
 
 📺 Assista ao vídeo pitch da solução:
-🔗 *(adicione o link do vídeo aqui)*
+🔗 *https://youtu.be/rJZaIE5rJwk?si=2y5ZPMIrLTlTHyLi*
 
 ---
 
